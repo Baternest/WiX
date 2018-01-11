@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Bundle Name="MainSetup" Version="1.0.0.0" Manufacturer="ASUS" UpgradeCode="40c5978d-9788-4b18-8a7f-0d94429efe00">
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense" />
+
+    <Chain>
+      <!-- TODO: Define the list of chained packages. -->
+      <!-- <MsiPackage SourceFile="path\to\your.msi" /> -->
+      <PackageGroupRef Id="InstallAllMsiBatOutside" />
+
+      <!--<PackageGroupRef Id="InstallOneMsiOutside" />-->
+    </Chain>
+
+  </Bundle>
+
+  <Fragment>
+    <PackageGroup Id="InstallAllMsiBatOutside">
+      <ExePackage Id="InstallAllMsiBatOutside"
+                  DisplayName="InstallAllMsiBatOutside"
+                  Cache="no"
+                  Compressed="yes"
+                  PerMachine="yes"
+                  Permanent="yes"
+                  Vital="yes"
+                  SourceFile="InstallMsi.bat"
+                  InstallCommand="[WixBundleOriginalSourceFolder]">
+      </ExePackage>
+    </PackageGroup>
+
+    <PackageGroup Id="InstallOneMsiOutside">
+      <ExePackage Id="InstallOneMsiOutside"
+                  DisplayName="InstallOneMsiOutside"
+                  Cache="no"
+                  Compressed="yes"
+                  PerMachine="yes"
+                  Permanent="yes"
+                  Vital="yes"
+                  SourceFile="Empty.bat"
+        InstallCommand="[WixBundleOriginalSourceFolder]DummyMsi1.msi">
+      </ExePackage>
+    </PackageGroup>
+  </Fragment>
+
+</Wix>
